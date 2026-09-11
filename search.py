@@ -95,22 +95,23 @@ def depthFirstSearch(problem: SearchProblem) -> List[Directions]:
 def breadthFirstSearch(problem: SearchProblem) -> List[Directions]:
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
-    # graph search algo, avoid expanding already visited
-    # track visited
-    # list of actions from start to goal
-    # util.py priority queue?
-    # level by level, repeat until queue empty, FIFO layer by layer
-    # 1st level: all nodes adjacent to source
-        # deque nodes
-        # add to visited
-    print("Start:", problem.getStartState())
-    # visit both
-    # visit neighbors of current node
-    # for node in adj(current node)
-        # if node not visited, mark visited, add to queue
-    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+    # sucessor: (state = position, action = NSEW, cost)
+    start = problem.getStartState()
+    visited = [start] # list of states, mark start as visited
+    queue = util.Queue()
+    queue.push((start, []))
+
+    while not queue.isEmpty():
+        current = queue.pop()  # gets shallowest state (FIFO)
+        state, path = current
+        if problem.isGoalState(state):
+            return path
+        for neighbor in problem.getSuccessors(state):  # neighbors of current node state
+            nextState, action, cost = neighbor
+            if nextState not in visited:
+                visited.append(nextState)
+                newPath = path + [action]
+                queue.push((nextState, newPath))
 
 def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
     """Search the node of least total cost first."""
