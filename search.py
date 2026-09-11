@@ -117,7 +117,23 @@ def depthFirstSearch(problem: SearchProblem) -> List[Directions]:
 def breadthFirstSearch(problem: SearchProblem) -> List[Directions]:
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # sucessor: (state = position, action = NSEW, cost)
+    start = problem.getStartState()
+    visited = [start] # list of states, mark start as visited
+    queue = util.Queue()
+    queue.push((start, []))
+
+    while not queue.isEmpty():
+        current = queue.pop()  # gets shallowest state (FIFO)
+        state, path = current
+        if problem.isGoalState(state):
+            return path
+        for neighbor in problem.getSuccessors(state):  # neighbors of current node state
+            nextState, action, cost = neighbor
+            if nextState not in visited:
+                visited.append(nextState)
+                newPath = path + [action]
+                queue.push((nextState, newPath))
 
 def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
     """Search the node of least total cost first."""
