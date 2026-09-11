@@ -96,6 +96,21 @@ def breadthFirstSearch(problem: SearchProblem) -> List[Directions]:
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+    # graph search algo, avoid expanding already visited
+    # track visited
+    # list of actions from start to goal
+    # util.py priority queue?
+    # level by level, repeat until queue empty, FIFO layer by layer
+    # 1st level: all nodes adjacent to source
+        # deque nodes
+        # add to visited
+    print("Start:", problem.getStartState())
+    # visit both
+    # visit neighbors of current node
+    # for node in adj(current node)
+        # if node not visited, mark visited, add to queue
+    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
 
 def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
     """Search the node of least total cost first."""
